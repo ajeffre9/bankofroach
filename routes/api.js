@@ -58,7 +58,7 @@ router.get('/fetch', function(req, res){
 	          return res.status(500).json({ success: false, data: err});
 	        }
 
-	        var query = client.query("SELECT * FROM koala.files WHERE username = $1;",  [req.username], function (err, result) {
+	        var query = client.query("SELECT * FROM koala.files WHERE username = $1;",  [req.body.username], function (err, result) {
 			    if (err) {
 			    	console.log(err);
 			      throw (err);
