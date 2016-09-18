@@ -58,26 +58,27 @@ router.get('/fetch', function(req, res){
 	          return res.status(500).json({ success: false, data: err});
 	        }
 
-	        var query = client.query("SELECT * FROM koala.files WHERE username = $1;",  [username], function (err, result) {
+	        var query = client.query("SELECT * FROM koala.files WHERE username = $1;",  [req.username], function (err, result) {
 			    if (err) {
 			    	console.log(err);
 			      throw (err);
 			    }
+			    console.log(JSON.stringify(result))
 			});
 
-			query.on('row', function(row) {
-				accountTable = accountTable + '<tr><td>' + row.name + '</td><td>' + row.balance +' </td></tr>';
-			 });
+			// query.on('row', function(row) {
+			// 	accountTable = accountTable + '<tr><td>' + row.name + '</td><td>' + row.balance +' </td></tr>';
+			//  });
 
-        	query.on('end', function() {
-        		accountTable += "</table>";
-			    if (err) {
-			      throw (err);
-			  	}
-			  	done();
-			  	res.send(accountTable);
+   //      	query.on('end', function() {
+   //      		accountTable += "</table>";
+			//     if (err) {
+			//       throw (err);
+			//   	}
+			//   	done();
+			//   	res.send(accountTable);
 
-        	});
+   //      	});
 
         	query.on('error', function(err) {
 	          console.log(err);
