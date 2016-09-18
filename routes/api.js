@@ -15,7 +15,7 @@ router.post('/insert', function(req, res){
 
 	try{
 	    // Grab data from http request
-	    var data = {name: req.body.accountName, balance: req.body.accountBalance};
+	    var data = {username: req.body.username, filename: req.body.filename, location: req.body.location, url: req.body.url};
 
 	    // Get a Postgres client from the connection pool
 	    pg.connect(connectionString, function(err, client, done) {
@@ -28,7 +28,7 @@ router.post('/insert', function(req, res){
 
 
 	        // Insert customer
-	        client.query("INSERT INTO bank.accounts (name, balance) VALUES($1, $2);", [data.name, data.balance], function (err, result) {
+	        client.query("INSERT INTO koala.files (username, filename, location, url) VALUES($1, $2, $3, $4);", [data.username, data.filename, data.location, data.url], function (err, result) {
 				done();
 				res.send();
 
@@ -43,9 +43,9 @@ router.post('/insert', function(req, res){
 });
 
 /******
-BALANCES
+FILE RECOVERY
 ******/
-router.get('/balances', function(req, res){
+router.get('/fetch', function(req, res){
 
 	try{
 	    // Get a Postgres client from the connection pool
@@ -57,9 +57,12 @@ router.get('/balances', function(req, res){
 	          return res.status(500).json({ success: false, data: err});
 	        }
 
-	        var accountTable = '<table class="table table-striped table-bordered"><tr><th>User</th><th>Balance</th></tr>';
-
-	        var query = client.query("SELECT name, balance FROM bank.accounts;");
+	        var query = client.query("SELECT * FROM koala.files WHERE username = $1;",  [username], function (err, result) {
+			    if (err) {
+			    	console.log(err);
+			      throw (err);
+			    }
+			});
 
 			query.on('row', function(row) {
 				accountTable = accountTable + '<tr><td>' + row.name + '</td><td>' + row.balance +' </td></tr>';
