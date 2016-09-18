@@ -29,7 +29,7 @@ body = req.body;// JSON.parse(req.body);
 
 
 	        // Insert customer
-	        client.query("INSERT INTO koala.files (username, filename, location, url) VALUES($1, $2, $3, $4);", [data.username, data.filename, data.location, data.url], function (err, result) {
+	        client.query("INSERT INTO koala.files (username, filename, location, url, data) VALUES($1, $2, $3, $4, $5);", [data.username, data.filename, data.location, data.url, data.data], function (err, result) {
 				done();
 				res.send();
 
