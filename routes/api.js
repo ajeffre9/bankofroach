@@ -5,7 +5,7 @@ var async = require("async");
 // Require the driver.
 var pg = require('pg');
 
-var connectionString = process.env.DATABASE_URL || 'postgresql://root@localhost:26257?sslmode=disable';
+var connectionString = process.env.DATABASE_URL || 'postgresql://146.148.124.124';
 var client = new pg.Client(connectionString);
 
 /******
