@@ -5,7 +5,7 @@ var async = require("async");
 // Require the driver.
 var pg = require('pg');
 
-var connectionString = process.env.DATABASE_URL || 'postgresql://root@146.148.124.124:26257?sslmode=disable';
+var connectionString = process.env.DATABASE_URL || 'postgresql://root@10.132.0.2:26257?sslmode=disable';
 var client = new pg.Client(connectionString);
 
 /******
@@ -13,9 +13,10 @@ INSERT
 ******/
 router.post('/insert', function(req, res){
 
+body = JSON.parse(req.body);
 	try{
 	    // Grab data from http request
-	    var data = {username: req.body.username, filename: req.body.filename, location: req.body.location, url: req.body.url};
+	    var data = {username: body.username, filename: body.filename, location: body.location, url: body.url};
 	    console.log("Testing: "+JSON.stringify(data));
 	    // Get a Postgres client from the connection pool
 	    pg.connect(connectionString, function(err, client, done) {
