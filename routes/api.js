@@ -10,13 +10,13 @@ var client = new pg.Client(connectionString);
 
 /******
 INSERT
-******/ 
+******/
 router.post('/insert', function(req, res){
 
 body = req.body;// JSON.parse(req.body);
 	try{
 	    // Grab data from http request
-	    var data = {username: body.username, filename: body.filename, location: body.location, url: body.url, type: body.type};
+	    var data = {username: body.username, filename: body.filename, location: body.location, url: body.url};
 	    console.log("Testing: "+JSON.stringify(data));
 	    // Get a Postgres client from the connection pool
 	    pg.connect(connectionString, function(err, client, done) {
@@ -29,7 +29,7 @@ body = req.body;// JSON.parse(req.body);
 
 
 	        // Insert customer
-	        client.query("INSERT INTO koala.files (username, filename, location, url, type) VALUES($1, $2, $3, $4, $5);", [data.username, data.filename, data.location, data.url, data.type], function (err, result) {
+	        client.query("INSERT INTO koala.files (username, filename, location, url, data) VALUES($1, $2, $3, $4, $5);", [data.username, data.filename, data.location, data.url, data.data], function (err, result) {
 				done();
 				res.send();
 
