@@ -6,7 +6,7 @@ var async = require("async");
 var pg = require('pg');
 
 var connectionString = process.env.DATABASE_URL || 'postgresql://root@10.132.0.2:26257?sslmode=disable';
-var client = new pg.Client(connectionString);
+//var client = new pg.Client(connectionString);
 
 /******
 INSERT
@@ -67,6 +67,7 @@ router.get('/fetch', function(req, res){
 			      throw (err);
 			    }
 			    console.log("RESULT: "+JSON.stringify(result.rows));
+			    done();
 			    res.send(result.rows);
 			});
 
