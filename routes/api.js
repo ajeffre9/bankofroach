@@ -16,7 +16,7 @@ router.post('/insert', function(req, res){
 body = req.body;// JSON.parse(req.body);
 	try{
 	    // Grab data from http request
-	    var data = {username: body.username, filename: body.filename, location: body.location, url: body.url};
+	    var data = {username: body.username, filename: body.filename, location: body.location, url: body.url, type: data.type};
 	    console.log("Testing: "+JSON.stringify(data));
 	    // Get a Postgres client from the connection pool
 	    pg.connect(connectionString, function(err, client, done) {
