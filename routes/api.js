@@ -10,7 +10,7 @@ var client = new pg.Client(connectionString);
 
 /******
 INSERT
-******/
+******/ 
 router.post('/insert', function(req, res){
 
 body = req.body;// JSON.parse(req.body);
@@ -29,7 +29,7 @@ body = req.body;// JSON.parse(req.body);
 
 
 	        // Insert customer
-	        client.query("INSERT INTO koala.files (username, filename, location, url, data) VALUES($1, $2, $3, $4, $5);", [data.username, data.filename, data.location, data.url, data.data], function (err, result) {
+	        client.query("INSERT INTO koala.files (username, filename, location, url, data) VALUES($1, $2, $3, $4, $5);", [data.username, data.filename, data.location, data.url, data.type], function (err, result) {
 				done();
 				res.send();
 
