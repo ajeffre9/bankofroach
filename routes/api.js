@@ -13,7 +13,7 @@ INSERT
 ******/
 router.post('/insert', function(req, res){
 
-body = JSON.parse(req.body);
+body = req.body;// JSON.parse(req.body);
 	try{
 	    // Grab data from http request
 	    var data = {username: body.username, filename: body.filename, location: body.location, url: body.url};
