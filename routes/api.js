@@ -66,7 +66,7 @@ router.get('/fetch', function(req, res){
 			    	console.log(err);
 			      throw (err);
 			    }
-			    console.log(result);
+			    console.log("RESULT: "+result.rows);
 			});
 
         	query.on('error', function(err) {
