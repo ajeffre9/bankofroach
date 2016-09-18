@@ -60,8 +60,9 @@ router.get('/fetch', function(req, res){
 	        console.log("<<<<<");
         	console.log(JSON.stringify(req.body.username));
         	console.log(">>>>>");
+        	console.log(JSON.stringify(req));
 
-	        var query = client.query("SELECT * FROM koala.files WHERE username = `sean`;",  [req.body.username], function (err, result) {
+	        var query = client.query("SELECT * FROM koala.files WHERE username = 'sean';",  [req.body.username], function (err, result) {
 			    if (err) {
 			    	console.log(err);
 			      throw (err);
